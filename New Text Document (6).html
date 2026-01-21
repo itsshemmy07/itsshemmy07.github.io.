@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:black;
+  overflow:hidden;
+}
+
+/* SCREENS */
+.screen{
+  position:fixed;
+  inset:0;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 1.2s ease;
+}
+.screen.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* COMMON */
+.center{
+  position:relative;
+  z-index:3;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:30px;
+  color:white;
+}
+.overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+}
+h1,h2{
+  font-family:'Playfair Display',serif;
+}
+.tap{
+  margin-top:50px;
+  font-weight:500;
+  letter-spacing:1px;
+  opacity:.9;
+}
+
+/* SPARKLES */
+.sparkle{
+  position:absolute;
+  width:4px;height:4px;
+  background:white;
+  border-radius:50%;
+  opacity:.8;
+  animation:sparkle 6s linear infinite;
+}
+@keyframes sparkle{
+  0%{transform:translateY(0) scale(0);opacity:0}
+  30%{opacity:1}
+  100%{transform:translateY(-120vh) scale(1);opacity:0}
+}
+
+/* SLIDESHOW */
+.slideshow{
+  width:85%;
+  max-width:1000px;
+  height:75%;
+  border-radius:30px;
+  overflow:hidden;
+  box-shadow:0 40px 90px rgba(0,0,0,.7);
+}
+.slide{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transition:opacity 1.8s ease, transform 1.8s ease;
+}
+.slide.active{
+  opacity:1;
+  transform:scale(1.05);
+}
+
+/* LOVE LETTER */
+.letter{
+  max-width:900px;
+  background:rgba(255,255,255,.14);
+  backdrop-filter:blur(12px);
+  padding:45px;
+  border-radius:30px;
+}
+.letter p{
+  opacity:0;
+  transform:translateY(10px);
+  transition:1s;
+  line-height:1.8;
+  font-size:1.05rem;
+  margin-bottom:14px;
+}
+
+/* POPUP PHOTOS */
+.popup{
+  position:absolute;
+  width:90px;height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  opacity:0;
+  box-shadow:0 15px 40px rgba(0,0,0,.5);
+  transition:opacity 1s ease;
+  z-index:4;
+}
+
+/* BUTTONS */
+.buttons{
+  position:relative;
+  height:130px;
+  margin-top:30px;
+}
+button{
+  padding:14px 38px;
+  font-size:1rem;
+  border-radius:30px;
+  border:none;
+  cursor:pointer;
+}
+.yes{
+  background:linear-gradient(135deg,#ff4d6d,#c9184a);
+  color:white;
+}
+.no{
+  position:absolute;
+  left:55%;
+  background:#ccc;
+}
+
+/* PROPOSAL */
+.stage{
+  position:relative;
+  width:360px;height:360px;
+}
+.man,.woman{
+  position:absolute;
+  bottom:0;
+  width:80px;height:160px;
+  border-radius:25px;
+}
+.man{left:60px;background:#222}
+.woman{right:60px;background:#d97a8a}
+.flower{
+  position:absolute;
+  width:30px;height:30px;
+  border-radius:50%;
+  background:red;
+  left:165px;
+  bottom:110px;
+  opacity:0;
+}
+
+/* PETALS */
+.petal{
+  position:absolute;
+  top:-40px;
+  width:16px;height:16px;
+  border-radius:50%;
+  animation:fall linear infinite;
+}
+.red{background:#c9184a}
+.blue{background:radial-gradient(circle,#74c0fc,#4dabf7)}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg)}
+}
+
+video{
+  width:85%;
+  max-width:900px;
+  border-radius:25px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div class="screen active" id="s0" style="background:url('https://images.unsplash.com/photo-1509042239860-f550ce710b93') center/cover">
+<div class="overlay"></div>
+<div class="center">
+<h1>Hey love 🤍</h1>
+<p>I made something just for you</p>
+<div class="tap">Tap anywhere to begin</div>
+</div>
+</div>
+
+<!-- SLIDESHOW -->
+<div class="screen" id="s1">
+<div class="center">
+<div class="slideshow" id="slideshow">
+<!-- replace with your 15 real images -->
+<div class="slide active" style="background-image:url('images/slide1.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide2.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide3.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide4.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide5.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide6.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide7.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide8.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide9.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide10.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide11.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide12.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide13.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide14.jpg')"></div>
+<div class="slide" style="background-image:url('images/slide15.jpg')"></div>
+</div>
+</div>
+</div>
+
+<!-- LOVE LETTER -->
+<div class="screen" id="s2" style="background:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6') center/cover">
+<div class="overlay"></div>
+<div class="center" id="letterBox">
+<div class="letter">
+<p>Hey love, this whole ride began as a mistake...</p>
+<p>From stranger to friend to crush to my love.</p>
+<p>You are my favourite person.</p>
+<p>I would always choose you.</p>
+<p>This isn’t dating — this is courtship.</p>
+<p>You be my wifey.</p>
+<p>I love you so much.</p>
+</div>
+</div>
+</div>
+
+<!-- QUESTION -->
+<div class="screen" id="s3">
+<div class="center" id="questionBox">
+<h1>MaryJudy Wangari Gachingi</h1>
+<h2>Will you be my Valentine? 🌹</h2>
+<div class="buttons">
+<button class="yes" id="yes">Yes</button>
+<button class="no" id="no">No</button>
+</div>
+</div>
+</div>
+
+<!-- PROPOSAL -->
+<div class="screen" id="s4">
+<div class="center">
+<div class="stage">
+<div class="man"></div>
+<div class="woman"></div>
+<div class="flower" id="flower"></div>
+</div>
+</div>
+</div>
+
+<!-- VIDEO -->
+<div class="screen" id="s5">
+<div class="center">
+<video autoplay>
+<source src="/mnt/data/WhatsApp Video 2026-01-21 at 2.06.53 AM.mp4" type="video/mp4">
+</video>
+</div>
+</div>
+
+<audio id="music" src="/mnt/data/Bien. - Chikwere (Official Audio).mp3"></audio>
+
+<script>
+let screens=document.querySelectorAll('.screen');
+let i=0;
+
+/* advance */
+document.body.onclick=()=>{
+ if(i===3)return;
+ screens[i].classList.remove('active');
+ i++;
+ screens[i].classList.add('active');
+ if(i===1)slideshow();
+ if(i===2)letter();
+ if(i===4)proposal();
+ document.getElementById('music').play();
+}
+
+/* slideshow */
+function slideshow(){
+ let s=0,slides=document.querySelectorAll('.slide');
+ setInterval(()=>{
+ slides[s].classList.remove('active');
+ s=(s+1)%slides.length;
+ slides[s].classList.add('active');
+ },3200);
+}
+
+/* letter */
+function letter(){
+ document.querySelectorAll('.letter p').forEach((p,i)=>{
+  setTimeout(()=>{p.style.opacity=1;p.style.transform='translateY(0)'},i*900);
+ });
+ popups('letterBox');
+}
+
+/* popups */
+function popups(id){
+ let box=document.getElementById(id);
+ for(let i=0;i<8;i++){
+  let img=document.createElement('img');
+  img.src='/mnt/data/ju.jpeg';
+  img.className='popup';
+  img.style.top=Math.random()*70+'%';
+  img.style.left=Math.random()*70+'%';
+  box.appendChild(img);
+  setTimeout(()=>img.style.opacity=1,500+i*400);
+  setTimeout(()=>img.remove(),4500+i*400);
+ }
+}
+
+/* runaway no */
+document.getElementById('no').onmouseenter=e=>{
+ e.target.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*80-40}px)`
+};
+
+/* yes */
+document.getElementById('yes').onclick=()=>document.body.click();
+
+/* proposal */
+function proposal(){
+ document.getElementById('flower').style.opacity=1;
+ for(let i=0;i<60;i++){
+  let p=document.createElement('div');
+  p.className='petal '+(Math.random()>0.5?'red':'blue');
+  p.style.left=Math.random()*100+'vw';
+  p.style.animationDuration=6+Math.random()*6+'s';
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),14000);
+ }
+ setTimeout(()=>document.body.click(),12000);
+}
+
+/* sparkles */
+for(let i=0;i<80;i++){
+ let s=document.createElement('div');
+ s.className='sparkle';
+ s.style.left=Math.random()*100+'vw';
+ s.style.top=Math.random()*100+'vh';
+ s.style.animationDuration=5+Math.random()*6+'s';
+ document.body.appendChild(s);
+}
+</script>
+</body>
+</html>
